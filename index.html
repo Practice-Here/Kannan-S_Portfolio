@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Page</title>
+    <link rel="stylesheet" href="loading.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Kannan S</h1>
+        <p class="location">Chennai<i class="fas fa-location-dot"></i></p>
+
+        <p class="loading">Loading...</p>
+        <div class="circle">
+            <span>100</span>
+        </div>
+
+        <p class="notice">
+            You've been granted access by the 256th,<br>
+            this site uses
+        </p>
+
+        <button class="enter-btn">Enter</button>
+    </div>
+
+    <div class="splash"></div>
+    
+    <script>
+        document.querySelector('.enter-btn').addEventListener('click', () => {
+            document.querySelector('.splash').classList.add('active');
+            setTimeout(() => {
+                window.location.href = "main.html"; // redirect
+            }, 1200); // match animation duration
+        });
+    </script>
+</body>
+</html>

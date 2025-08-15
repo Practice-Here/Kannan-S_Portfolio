@@ -1,0 +1,126 @@
+/* Selection color */
+::selection {
+    background: #90ff22;
+    color: black;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    color: white;
+    font-family: 'Lora', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: left;
+    max-width: 500px;
+    padding: 20px;
+}
+
+/* Title */
+.title {
+    font-family: 'Lora', serif;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+}
+
+/* Location */
+.location {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+.location i {
+    margin-left: 6px;
+    font-size: 0.6rem;
+    color: #90ff22;
+    text-shadow: 0 0 2px #90ff22, 0 0 4px #90ff22;
+    vertical-align: middle;
+}
+
+/* Loading text animation */
+.loading {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    animation: fadeBlink 1.5s infinite;
+}
+
+@keyframes fadeBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Circular badge */
+.circle {
+    width: 31px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #90ff22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    animation: borderGlow 1.5s ease-in-out infinite;
+}
+@keyframes borderGlow {
+    0%, 100% { box-shadow: 0 0 2px #90ff22, 0 0 4px #90ff22; }
+    50% { box-shadow: 0 0 6px #90ff22, 0 0 12px #90ff22; }
+}
+
+/* Notice text */
+.notice {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    color: darkgrey;
+}
+
+/* Enter button */
+.enter-btn {
+    border-radius: 15px;
+    padding: 8px 20px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    box-shadow: 0 0 5px rgba(255,255,255,0.8);
+
+}
+.enter-btn:hover {
+    background: #90ff22;
+    color: black;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .title { font-size: 2rem; }
+}
+
+/* Splash overlay */
+.splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #90ff22;
+    transform: scale(0);
+    transform-origin: center;
+    z-index: 9999;
+    border-radius: 50%;
+    opacity: 0;
+    transition: transform 1.2s ease-out, opacity 1.2s ease-out;
+}
+
+.splash.active {
+    transform: scale(3);
+    opacity: 1;
+}
