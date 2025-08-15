@@ -247,47 +247,43 @@
     </footer>
     <!-- footer section end -->
     <script src="script.js"></script>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <!-- Contact Form script -->
-    <script>
-        function SendEmail() {
-    var name = document.getElementById("Name").value;
-    var email = document.getElementById("Email").value;
-    var subject = document.getElementById("Subject").value;
-    var message = document.getElementById("Message").value;
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function(){
+    emailjs.init({
+        publicKey: "tIJuyPY0YniSYKHJc", // Your Public Key
+    });
+})();
 
-    if (name !== "" && email !== "" && subject !== "" && message !== "") {
-        Email.send({
-            Host: "smtp.gmail.com",
-            Port: "587",
-            Username: "personalprice75@gmail.com",
-            Password: "lokvnxgmprueidee",
-            To: "strkanna24@gmail.com",
-            From: "personalprice75@gmail.com",
-            Subject: "New Contact Form Enquiry",
-            Body: "Name: " + name +
-                "<br> Email: " + email +
-                "<br> Subject: " + subject +
-                "<br> Message: " + message
-        }).then(
-            function (message) {
-                alert("Message Sent Successfully!");
-                document.getElementById("Name").value = "";
-                document.getElementById("Email").value = "";
-                document.getElementById("Subject").value = "";
-                document.getElementById("Message").value = "";
-            }
-        ).catch(
-            function (error) {
-                alert("There was an error sending the message. Please try again later.");
-            }
-        );
+function SendEmail() {
+    var name = document.getElementById("Name").value.trim();
+    var email = document.getElementById("Email").value.trim();
+    var subject = document.getElementById("Subject").value.trim();
+    var message = document.getElementById("Message").value.trim();
+
+    if (name && email && subject && message) {
+        emailjs.send("service_x1qie7u", "template_tn77i58", {
+            subject: subject,
+            name: name,
+            message: message,
+            email: email
+        })
+        .then(function(response) {
+            alert("Message Sent Successfully!");
+            document.getElementById("Name").value = "";
+            document.getElementById("Email").value = "";
+            document.getElementById("Subject").value = "";
+            document.getElementById("Message").value = "";
+        })
+        .catch(function(error) {
+            console.error("EmailJS Error Object:", error);
+            alert("Error: " + ("Message failed to send. Please try again later!.🙂"));
+        });
     } else {
-        alert("Please fill in all the required fields.");
+        alert("⚠️Please fill in all the required fields.");
     }
-
     return false;
-    }
+}
     </script>
 </body>
 </html>
