@@ -33,24 +33,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const splash = document.querySelector('.splash');
   const enterBtn = document.querySelector('.enter-btn');
 
-  // Flag: did we just return from main.html?
+  // Check if we came back from main.html
   const fromMain = sessionStorage.getItem("fromMain") === "true";
 
-  // Reset splash only if coming back from main.html
   if (fromMain) {
+    // If returning from main.html → reset splash instantly
     splash.classList.remove('active');
     splash.style.opacity = '0';
     splash.style.transform = 'scale(0)';
     sessionStorage.removeItem("fromMain"); // clear flag
   }
 
-  // On Enter: play splash, then go to main.html
+  // Handle Enter button click
   enterBtn.addEventListener("click", () => {
     splash.classList.add("active");
     setTimeout(() => {
-      sessionStorage.setItem("fromMain", "true"); // mark return
+      sessionStorage.setItem("fromMain", "true"); // mark that we came from main
       location.href = "main.html";
-    }, 1200); // match CSS transition
+    }, 1200); // match CSS animation
   });
 
   // Counter animation
@@ -64,8 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+
 </body>
 </html>
+
 
 
 
