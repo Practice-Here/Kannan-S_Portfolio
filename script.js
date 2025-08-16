@@ -61,10 +61,21 @@ $(document).ready(function () {
         }
     });
 
-    document.querySelectorAll(".skill-icon").forEach(icon => {
+  document.querySelectorAll(".skill-icon").forEach(icon => {
     icon.addEventListener("click", () => {
         icon.classList.toggle("active");
     });
-});
+  });
 
+    // Redirect to index.html on refresh
+    if (performance.navigation.type === 1) {  
+     window.location.href = "index.html";
+    }
+
+  // Redirect to index.html on back button navigation
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        window.location.href = "index.html";
+    }
+  });
 });
