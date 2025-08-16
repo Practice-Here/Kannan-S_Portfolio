@@ -67,27 +67,15 @@ $(document).ready(function () {
     });
  });
 
-   // Back/refresh handling for main.html
-if (location.pathname.endsWith("main.html")) {
-  // On refresh → go back to index.html
-  window.addEventListener("load", () => {
-    if (performance && performance.navigation && performance.navigation.type === 1) {
-      location.replace("index.html");
+ //  Detect page refresh (modern way)
+    const navEntries = performance.getEntriesByType("navigation");
+    if (navEntries.length > 0 && navEntries[0].type === "reload") {
+        window.location.href = "index.html"; // Always back to loading page
     }
-  });
 
-  // Push a state so Back triggers popstate
-  history.pushState(null, null, location.href);
-
-  // On back button → go to index.html
-  window.addEventListener("popstate", () => {
-    location.replace("index.html");
-  });
-
-  // On bfcache restore → also go back
-  window.addEventListener("pageshow", (e) => {
-    if (e.persisted) location.replace("index.html");
-  });
-}
+ // Detect back arrow navigation
+     window.addEventListener("popstate", () => {
+     window.location.href = "index.html"; // Force back to loading page
+     });
 
 });
