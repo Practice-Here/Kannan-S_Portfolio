@@ -67,18 +67,19 @@ $(document).ready(function () {
     });
  });
 
-   if (window.location.pathname.endsWith("main.html")) {
-    // Redirect to index.html on refresh
-    if (performance.navigation.type === 1) {
-        window.location.href = "index.html";
-    }
+   if (location.pathname.endsWith("main.html")) {
+  // Refresh → go back to index.html
+  if (performance.navigation.type === 1) {
+    location.href = "index.html";
+  }
 
-    // Redirect to index.html on back button
-    window.addEventListener("pageshow", function (event) {
-        if (event.persisted) {
-            window.location.href = "index.html";
-        }
-    });
+  // Back button → go back to index.html
+  window.addEventListener("popstate", () => {
+    location.href = "index.html";
+  });
+
+  // Push a dummy state so back button fires popstate
+  history.pushState(null, null, location.href);
 }
 
 });
