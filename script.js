@@ -67,16 +67,18 @@ $(document).ready(function () {
     });
  });
 
-   // Redirect to index.html on refresh
-    if (performance.navigation.type === 1) {  
-     window.location.href = "index.html";
-    }
-
-  // Redirect to index.html on back button navigation
-  window.addEventListener("pageshow", function (event) {
-    if (event.persisted) {
+   if (window.location.pathname.endsWith("main.html")) {
+    // Redirect to index.html on refresh
+    if (performance.navigation.type === 1) {
         window.location.href = "index.html";
     }
-  });
+
+    // Redirect to index.html on back button
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+            window.location.href = "index.html";
+        }
+    });
+}
 
 });
