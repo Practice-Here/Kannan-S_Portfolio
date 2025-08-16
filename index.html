@@ -29,45 +29,22 @@
     <div class="splash"></div>
     
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const splash = document.querySelector('.splash');
-  const enterBtn = document.querySelector('.enter-btn');
+ document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector('.enter-btn').addEventListener('click', () => {
+        document.querySelector('.splash').classList.add('active');
+        setTimeout(() => {
+            window.location.href = "main.html"; // redirect
+        }, 1200); // match animation duration
+    });
+    let count = 0;
+    let span = document.getElementById("count");
 
-  // Check if we came back from main.html
-  const fromMain = sessionStorage.getItem("fromMain") === "true";
-
-  if (fromMain) {
-    // If returning from main.html → reset splash instantly
-    splash.classList.remove('active');
-    splash.style.opacity = '0';
-    splash.style.transform = 'scale(0)';
-    sessionStorage.removeItem("fromMain"); // clear flag
-  }
-
-  // Handle Enter button click
-  enterBtn.addEventListener("click", () => {
-    splash.classList.add("active");
-    setTimeout(() => {
-      sessionStorage.setItem("fromMain", "true"); // mark that we came from main
-      location.href = "main.html";
-    }, 1200); // match CSS animation
-  });
-
-  // Counter animation
-  let count = 0;
-  let span = document.getElementById("count");
-  let interval = setInterval(() => {
-    count++;
-    span.textContent = count;
-    if (count >= 100) clearInterval(interval);
-  }, 5);
-});
+    let interval = setInterval(() => {
+        count++;
+        span.textContent = count;
+        if (count >= 100) clearInterval(interval);
+    }, 5);
+ });
 </script>
-
-
 </body>
 </html>
-
-
-
-
