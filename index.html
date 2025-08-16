@@ -15,7 +15,7 @@
 
         <p class="loading">Loading...</p>
         <div class="circle">
-            <span>100</span>
+            <span id="count">0</span>
         </div>
 
         <p class="notice">
@@ -29,12 +29,22 @@
     <div class="splash"></div>
     
     <script>
+     document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('.enter-btn').addEventListener('click', () => {
             document.querySelector('.splash').classList.add('active');
             setTimeout(() => {
                 window.location.href = "main.html"; // redirect
             }, 1200); // match animation duration
         });
-    </script>
+        let count = 0;
+        let span = document.getElementById("count");
+        let interval = setInterval(() => {
+         count++;
+         span.textContent = count;
+         if (count >= 100) clearInterval(interval);
+       }, 5);
+   });
+  </script>
 </body>
 </html>
+
