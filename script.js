@@ -65,9 +65,9 @@ $(document).ready(function () {
     icon.addEventListener("click", () => {
         icon.classList.toggle("active");
     });
-  });
+ });
 
-    // Redirect to index.html on refresh
+   // Redirect to index.html on refresh
     if (performance.navigation.type === 1) {  
      window.location.href = "index.html";
     }
@@ -78,4 +78,5 @@ $(document).ready(function () {
         window.location.href = "index.html";
     }
   });
+
 });
