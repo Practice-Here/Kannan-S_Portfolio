@@ -68,18 +68,20 @@ $(document).ready(function () {
  });
 
    if (location.pathname.endsWith("main.html")) {
-  // Refresh → go back to index.html
-  if (performance.navigation.type === 1) {
-    location.href = "index.html";
-  }
+  // Refresh → always go back to index.html
+  window.addEventListener("load", () => {
+    if (performance.navigation.type === 1) {
+      location.replace("index.html");
+    }
+  });
+
+  // Push dummy history state so "Back" can be caught
+  history.pushState(null, null, location.href);
 
   // Back button → go back to index.html
   window.addEventListener("popstate", () => {
-    location.href = "index.html";
+    location.replace("index.html");
   });
-
-  // Push a dummy state so back button fires popstate
-  history.pushState(null, null, location.href);
 }
 
 });
