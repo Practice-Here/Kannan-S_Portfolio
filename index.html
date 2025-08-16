@@ -33,27 +33,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const splash = document.querySelector('.splash');
   const enterBtn = document.querySelector('.enter-btn');
 
-  // Force reset splash instantly
-  function resetSplash() {
-    if (!splash) return;
+  // Flag: did we just return from main.html?
+  const fromMain = sessionStorage.getItem("fromMain") === "true";
+
+  // Reset splash only if coming back from main.html
+  if (fromMain) {
     splash.classList.remove('active');
     splash.style.opacity = '0';
     splash.style.transform = 'scale(0)';
+    sessionStorage.removeItem("fromMain"); // clear flag
   }
 
-  resetSplash(); // on first load
-
-  // If coming back from bfcache (Back), reset splash again
-  window.addEventListener("pageshow", (e) => {
-    resetSplash();
-  });
-
-  // Handle Enter button
+  // On Enter: play splash, then go to main.html
   enterBtn.addEventListener("click", () => {
     splash.classList.add("active");
     setTimeout(() => {
+      sessionStorage.setItem("fromMain", "true"); // mark return
       location.href = "main.html";
-    }, 1200);
+    }, 1200); // match CSS transition
   });
 
   // Counter animation
@@ -66,7 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 5);
 });
 </script>
+
 </body>
 </html>
+
 
 
