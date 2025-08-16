@@ -33,33 +33,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const splash = document.querySelector('.splash');
   const enterBtn = document.querySelector('.enter-btn');
 
-  // Make sure splash is hidden right now (in case we came back from main.html)
-  function hideSplashInstant() {
+  // Force reset splash instantly
+  function resetSplash() {
     if (!splash) return;
-    const old = splash.style.transition;
-    splash.style.transition = 'none';       // disable transition to avoid flicker
-    splash.classList.remove('active');      // remove the class that keeps it visible
+    splash.classList.remove('active');
     splash.style.opacity = '0';
     splash.style.transform = 'scale(0)';
-    // force reflow and restore transition
-    requestAnimationFrame(() => { splash.offsetHeight; splash.style.transition = old; });
   }
 
-  hideSplashInstant();
+  resetSplash(); // on first load
 
-  // If page is restored from bfcache (Back/Forward), hide the splash again
-  window.addEventListener('pageshow', (e) => {
-    if (e.persisted) hideSplashInstant();
-    else hideSplashInstant(); // also keep it clean on normal show
+  // If coming back from bfcache (Back), reset splash again
+  window.addEventListener("pageshow", (e) => {
+    resetSplash();
   });
 
-  // On Enter: play splash once, then go to main.html
-  enterBtn.addEventListener('click', () => {
-    splash.classList.add('active');
-    setTimeout(() => { location.href = 'main.html'; }, 1200);
+  // Handle Enter button
+  enterBtn.addEventListener("click", () => {
+    splash.classList.add("active");
+    setTimeout(() => {
+      location.href = "main.html";
+    }, 1200);
   });
+
+  // Counter animation
+  let count = 0;
+  let span = document.getElementById("count");
+  let interval = setInterval(() => {
+    count++;
+    span.textContent = count;
+    if (count >= 100) clearInterval(interval);
+  }, 5);
 });
 </script>
 </body>
 </html>
+
 
