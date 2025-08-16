@@ -67,38 +67,21 @@ $(document).ready(function () {
     });
  });
 
-   (function () {
-  // Only run this on main.html
-  if (!location.pathname.endsWith('main.html')) return;
-
-  // Detect a reload in all modern browsers (with a fallback)
-  function isReload() {
-    try {
-      const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
-      if (nav && nav.type) return nav.type === 'reload';
-    } catch (e) {}
-    return performance && performance.navigation && performance.navigation.type === 1;
-  }
-
-  // On refresh of main.html -> go to index.html
-  if (isReload()) {
-    location.href = 'index.html';
-    return;
-  }
-
-  // Ensure Back from main.html goes to index.html
-  // 1) Push a dummy state so Back triggers popstate
-  history.pushState(null, '', location.href);
-
-  // 2) When user presses Back, redirect to index.html
-  window.addEventListener('popstate', function () {
-    location.href = 'index.html';
+   if (location.pathname.endsWith("main.html")) {
+  // On refresh → go back to index.html
+  window.addEventListener("load", () => {
+    if (performance && performance.navigation && performance.navigation.type === 1) {
+      location.replace("index.html");
+    }
   });
 
-  // 3) If the page is restored from the back-forward cache, also redirect
-  window.addEventListener('pageshow', function (e) {
-    if (e.persisted) location.href = 'index.html';
+  // Push state so back button triggers popstate
+  history.pushState(null, null, location.href);
+
+  // On back button → go to index.html
+  window.addEventListener("popstate", () => {
+    location.replace("index.html");
   });
-})();
+}
 
 });
